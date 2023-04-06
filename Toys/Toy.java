@@ -49,7 +49,7 @@ public abstract class Toy {
             System.out.println(this.title + " больше нет");
             return;
         } else {
-            this.quantity--;
+            this.quantity = this.quantity - 1;
         }
 
     }
