@@ -62,8 +62,8 @@ public class PrizeBox {
 
     public int dropPrize() {
         Random random = new Random();
-        Integer[] firstDrop = new Integer[(int) (1 + this.inside.size() / 10)];
-        // первый выбор элементов
+        Integer[] firstDrop = new Integer[(int) (1 + this.inside.size() / 5)];
+        // первый выбор элементов случаен
         if (this.inside.size() == 0) {
             return -1;
         }
@@ -75,7 +75,7 @@ public class PrizeBox {
             }
 
         }
-        // нахождение наибольшего веса
+        // нахождение наибольшего веса после отбора сравнением
         int maxIndex = firstDrop[0];
         int maxValue = this.inside.get(maxIndex).getChance();
         this.inside.get(firstDrop[0]).getChance();
