@@ -17,17 +17,14 @@ public class Roulete {
 
     public static void main(String[] args) throws IOException {
         try (Scanner readScanner = new Scanner(System.in)) {
-            Bullet bullet = new Bullet();
-            Dolly dolly = new Dolly();
-            HE grenade = new HE();
-            Rubics rubics = new Rubics();
-            Solder solder = new Solder();
+
             PrizeBox box = new PrizeBox();
             boolean active = true;
-            box.FillBox(bullet, dolly, solder, rubics, grenade);
-
+            box.FillBox();
             System.out.println("Добро пожаловать в нашу игру");
             while (active) {
+                System.out.println("______________________________________________________________");
+
                 System.out.println(
                         "Чего бы вам хотелось\n1-Посмотреть витрину\n2-Обновить витрину\n3-Собрать свою витрину\n4-Выйграть приз\n5-Выйти\n");
                 System.out.println("Ваша команда:");
@@ -38,7 +35,7 @@ public class Roulete {
                         break;
                     case 2:
                         box.clearBox();
-                        box.FillBox(bullet, dolly, solder, rubics, grenade);
+                        box.FillBox();
                         break;
                     case 3:
                         box.clearBox();
@@ -46,30 +43,32 @@ public class Roulete {
                         while (edit) {
                             System.out.println("Ваша витрина:");
                             System.out.println(box.printBox());
+                            System.out.println("______________________________________________________________");
                             System.out.println(
                                     "Что хотите добавить\n1-Пулю\n2-Куклу\n3-Солдатика\n4-Кубик Рубика\n5-Вызрыватку\n6-Закончить набор игрушек");
                             System.out.println("Ваша команда:");
                             int whatToAdd = readScanner.nextInt();
                             switch (whatToAdd) {
                                 case 1:
-                                    box.addToy(bullet);
+                                    box.addToy(new Bullet());
                                     break;
                                 case 2:
-                                    box.addToy(dolly);
+                                    box.addToy(new Dolly());
                                     break;
                                 case 3:
-                                    box.addToy(solder);
+                                    box.addToy(new Solder());
                                     break;
                                 case 4:
-                                    box.addToy(rubics);
+                                    box.addToy(new Rubics());
                                     break;
                                 case 5:
-                                    box.addToy(grenade);
+                                    box.addToy(new HE());
                                     break;
                                 case 6:
                                     edit = false;
                                     System.out.println("Ваша витрина:");
                                     System.out.println(box.printBox());
+                                    break;
                                 default:
                                     System.out.println("Непонятная команда");
                                     break;
@@ -83,9 +82,11 @@ public class Roulete {
                             System.out.println("игрушек на витрине нет");
                             break;
                         }
-                        try (FileWriter writer = new FileWriter("./YourPrize.txt")) {
+                        try (FileWriter writer = new FileWriter("./JavaMiddle/YourPrize.txt")) {
                             writer.write(box.getInside().get(prizeIndex).getTitle());
                         }
+                        System.out.println("Поздравляю! вы выйграли " + box.getInside().get(prizeIndex).getTitle());
+                        System.out.println("Он уже лежит в вашем файлике");
                         box.removeItem(prizeIndex);
                         break;
                     case 5:
@@ -97,9 +98,9 @@ public class Roulete {
                         System.out.println("Неверная команда, повторите, пожалуйста");
                         break;
                 }
+
             }
-
         }
-    }
 
+    }
 }

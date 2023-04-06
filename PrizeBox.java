@@ -46,15 +46,17 @@ public class PrizeBox {
     }
 
     public String printBox() {
-        String out = "В корзине лежит\n";
-        int rows = Math.round(this.inside.size() / 3);
-        for (int i = 0; i < rows; i++) {
-            for (int j = i; j < rows; j++) {
-                out = out + this.inside.get(j + i).getTitle() + "|";
+        String out = "На витрине лежит\n______________________________________________________________";
+
+        for (int i = 0; i < this.inside.size() - 3; i += 3) {
+            out = out + "\n";
+            for (int j = i; j < i + 3; j++) {
+                out = out + this.inside.get(j).getTitle() + "|";
             }
+
             out = out + "\n";
         }
-
+        out = out + "______________________________________________________________";
         return out;
     }
 
@@ -92,27 +94,34 @@ public class PrizeBox {
         return maxIndex;
     }
 
-    public void FillBox(Bullet bullet, Dolly dolly, Solder solder, Rubics rubics, HE he) {
+    public void FillBox() {
+        this.inside.clear();
         int randToy;
         Random random = new Random();
-        for (int i = 0; i < 5; i++) {
-            randToy = random.nextInt(1, 5);
+        for (int i = 0; i < 11; i++) {
+            randToy = random.nextInt(1, 6);
             switch (randToy) {
                 case 1:
-                    this.inside.add(bullet);
-                    bullet.downQuantity();
+                    this.inside.add(new Bullet());
+                    // bullet.downQuantity();
+                    break;
                 case 2:
-                    this.inside.add(dolly);
-                    dolly.downQuantity();
+                    this.inside.add(new Dolly());
+                    // dolly.downQuantity();
+                    break;
+
                 case 3:
-                    this.inside.add(solder);
-                    solder.downQuantity();
+                    this.inside.add(new Solder());
+                    // solder.downQuantity();
+                    break;
                 case 4:
-                    this.inside.add(rubics);
-                    rubics.downQuantity();
+                    this.inside.add(new Rubics());
+                    // rubics.downQuantity();
+                    break;
                 case 5:
-                    this.inside.add(he);
-                    he.downQuantity();
+                    this.inside.add(new HE());
+                    // he.downQuantity();
+                    break;
 
             }
         }
