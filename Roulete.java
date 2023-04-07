@@ -82,7 +82,7 @@ public class Roulete {
                             System.out.println("игрушек на витрине нет");
                             break;
                         }
-                        try (FileWriter writer = new FileWriter("./JavaMiddle/YourPrize.txt")) {
+                        try (FileWriter writer = new FileWriter("./YourPrize.txt")) {
                             writer.write(box.getInside().get(prizeIndex).getTitle());
                         }
                         System.out.println("Поздравляю! вы выйграли " + box.getInside().get(prizeIndex).getTitle());
